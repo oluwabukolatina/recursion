@@ -1,0 +1,39 @@
+[
+    {
+        "id": 1,
+        "name": "Leanne Graham",
+        "username": "Bret",
+        "email": "Sincere@april.biz",
+        "phone": "1-770-736-8031 x56442",
+        "website": "hildegard.org",
+        "company": [{
+        "companyRating": "1",
+        "bs": "harness real-time e-markets"
+        },
+        {
+            "companyRating": "2",
+            "bs": "harness real-time e-markets"
+            },
+            {
+                "companyRating": "2",
+                "bs": "harness real-time e-markets"
+                }]
+    },
+    {
+        "id": 2,
+        "name": "Leanne Graham",
+        "company": [{
+        "companyRating": "2",
+        "bs": "harness real-time e-markets"
+        },
+        {
+            "companyRating": "3",
+            "bs": "harness real-time e-markets"
+            },
+            {
+                "companyRating": "3",
+                "bs": "harness real-time e-markets"
+                }]
+    }
+        
+]
