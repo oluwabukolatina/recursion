@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.status(200)
     .json({
       status: true,
-      message: 'sherlock says hi. try this url if you dont where to go next... ',
+      message: 'sherlock says hi',
     });
 });
 app.use('/retail24', transactionRouter);
