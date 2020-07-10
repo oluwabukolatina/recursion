@@ -2,8 +2,15 @@
 
 ## Getting Started
 
-> [Technologies](#technologies-used) &middot;  [Installations](#installations) &middot; [API Endpoints](#api-endpoints) &middot; [Author](#author)
+> [Technologies](#technologies-used) &middot; [Installations](#installations) &middot; [API Endpoints](#api-endpoints) &middot; [Author](#author)
 
+---
+
+## API Documentation
+
+- [API DOC](https://documenter.getpostman.com/view/4223397/T17M7R4s?version=latest)
+
+---
 
 ## Heroku App
 
@@ -46,4 +53,3 @@ Application is deployed to Heroku. Use public URL [https://stark-brook-67508.her
 ## Author
 
 - [Oluwabukola Tina](https://github.com/oluwabukolatina)
-
