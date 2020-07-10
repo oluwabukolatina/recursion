@@ -1,22 +1,23 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const logger = require('morgan');
+const transactionRouter = require('./src/routes/transactions');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-const transactionRouter = require('./routes/transactions');
-
-var app = express();
+const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use('/', indexRouter);
+app.get('/', (req, res) => {
+  res.status(200)
+    .json({
+      status: true,
+      message: 'sherlock says hi. try this url if you dont where to go next... ',
+    });
+});
 app.use('/retail24', transactionRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
