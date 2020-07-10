@@ -1,33 +1,70 @@
 const data = require('../data');
 
 module.exports = {
-
     async getTransactions(req, res) {
-        const { transactionId, confidenceLevel } = req.query;
-        // console.log(transactionId, confidenceLevel)
-        const result = recurse(data, transactionId);
-
-        console.log(result);
-        res.send({ result });
-
+      const { transactionId, confidenceLevel } = req.query;
+  
+      const { id, age, name, email, phone, geoInfo, children } = walk(
+        data,
+        transactionId
+      );
+      const newChildren = [];
+      walkByConfidence(children, confidenceLevel, newChildren);
+  
+      res.send({ id, age, name, email, phone, geoInfo, children: newChildren });
+    },
+  };
+  
+  function walkByConfidence(data, confidence, store) {
+    if (!data) {
+      return;
     }
-}
-
-function recurse(data, transactionId) {
-    let transaction;
-    for (let i = 0; i <= data.length; i++) {
-        console.log(`layer${i}`);
-        // console.log(data[i].name);
-        console.log('jhsdbvkbsdhjksdzkvkzbxkvjbjzbxcvkjsdkzxbvcbdbxz')
-        if (data.id === transactionId) {
-            transaction = data;
-            console.log(`layer${i}`, transaction);
+    if (Array.isArray(data)) {
+      for (let index = 0; index < data.length; index++) {
+        const currentData = data[index];
+        if (
+          currentData.connectionInfo &&
+          currentData.connectionInfo.confidence >= confidence
+        ) {
+          const {
+            id,
+            age,
+            name,
+            email,
+            phone,
+            geoInfo,
+            connectionInfo,
+          } = currentData;
+          store.push({ id, age, name, email, phone, geoInfo, connectionInfo });
         }
-        
-        if (data[i].children !== undefined) {
-            console.log(`layer${i}`);
-            recurse(data[i].children, transactionId);
+        const result = walkByConfidence(currentData, confidence, store);
+        if (result !== undefined) {
+          return result;
         }
+      }
+    } else {
+      if (data && data.children) {
+        // Has children so we walk.
+        return walkByConfidence(data.children, confidence, store);
+      }
     }
-    return transaction;
-}
+  }
+  function walk(data, transactionId) {
+    if (Array.isArray(data)) {
+      for (let index = 0; index < data.length; index++) {
+        const currentData = data[index];
+        // The meat
+        if (currentData.id == transactionId) {
+          return currentData;
+        }
+        const result = walk(currentData, transactionId);
+        if (result !== undefined) {
+          return result;
+        }
+      }
+    } else {
+      if (data.children) {
+        return walk(data.children, transactionId);
+      }
+    }
+  }
